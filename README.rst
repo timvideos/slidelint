@@ -1,8 +1,9 @@
 .. image:: https://travis-ci.org/timvideos/slidelint.png?branch=master
     :target: https://travis-ci.org/timvideos/slidelint
 
-.. image:: https://landscape.io/github/timvideos/slidelint/master/badges
-    :target: https://landscape.io/github/timvideos/slidelint
+.. image:: https://landscape.io/github/timvideos/slidelint/master/landscape.svg
+   :target: https://landscape.io/github/timvideos/slidelint/master
+   :alt: Code Health
 
 .. image:: https://coveralls.io/repos/timvideos/slidelint/badge.png
     :target: https://coveralls.io/r/timvideos/slidelint
