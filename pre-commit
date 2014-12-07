@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# pylint: disable=invalid-name
+# pylint: disable=too-many-locals,too-many-branches,too-many-statements
+# pylint: disable=global-statement
 
 """
 Git pre-commit hook for checking Python code quality. The hook requires pylint
@@ -25,7 +28,12 @@ LICENSE:
 LIMIT = 10.00
 
 # pylint command to run
-PYLINT = 'pylint'
+try:
+    import subprocess
+    subprocess.check_output(["bin/pylint", "--help"], stderr=subprocess.STDOUT)
+    PYLINT = 'bin/pylint'
+except OSError:
+    PYLINT = 'pylint'
 
 # where to look for options
 PYLINTRC = '.pylintrc'
@@ -144,7 +152,6 @@ def checker():
                     command.append('--rcfile=.pylintrc')
 
             command.append(python_file)
-
             proc = subprocess.Popen(
                 command,
                 stdout=subprocess.PIPE,
@@ -152,6 +159,12 @@ def checker():
             out, _ = proc.communicate()
         except OSError as err:
             print "\nAn error occurred. Is pylint installed?"
+            print "Tried to run:"
+            print " '%s'" % " ".join(command)
+            print "in directory:"
+            print " '%s'" % os.getcwd()
+            print err
+            print
             sys.exit(1)
 
         # Check for the result
@@ -170,6 +183,8 @@ def checker():
 
         # Add some output
         print '%.2f/10.00\t%s' % (score, status)
+        if status == 'FAILED':
+            print out.split('Report')[0].strip()
 
         # Bump parsed files
         i += 1
