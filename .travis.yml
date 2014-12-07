@@ -12,8 +12,14 @@ install:
  - pip install setuptools --upgrade
  - python bootstrap.py
  - bin/buildout -N -q -t 10
+ - pip install nosexcover
 
 # Run the tests
 script:
  - bin/pylint --report=no --rcfile=.pylintrc src/slidelint
- - bin/nosetests --no-skip
+ - bin/nosetests --with-xcoverage --no-skip
+
+# Upload coverage information to coveralls.io
+after_success:
+ - pip install coveralls
+ - coveralls

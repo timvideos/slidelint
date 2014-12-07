@@ -4,6 +4,8 @@
 .. image:: https://landscape.io/github/timvideos/slidelint/master/badges
     :target: https://landscape.io/github/timvideos/slidelint
 
+.. image:: https://coveralls.io/repos/timvideos/slidelint/badge.png
+    :target: https://coveralls.io/r/timvideos/slidelint
 
 .. contents::
 
