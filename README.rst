@@ -1,6 +1,9 @@
 .. image:: https://travis-ci.org/timvideos/slidelint.png?branch=master
     :target: https://travis-ci.org/timvideos/slidelint
 
+.. image:: https://landscape.io/github/timvideos/slidelint/master/badges
+    :target: https://landscape.io/github/timvideos/slidelint
+
 
 .. contents::
 
