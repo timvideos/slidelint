@@ -11,6 +11,7 @@ Installation
 
 **System requirements:**
 
+    * Python 2
     * setuptools > 1.0
     * java-7 (for LanguageTool)
     * python-dev (python-develop)
