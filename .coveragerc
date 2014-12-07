@@ -4,6 +4,12 @@ omit =
     parts/*
     eggs/*
     */test*
+    */python?.?/*
+    */site-packages/nose/*
 exclude_lines =
-    if self.debug:
+    pragma: no cover
+    def __repr__
+    raise AssertionError
     raise NotImplementedError
+    if __name__ == .__main__.:
+    if self.debug:
