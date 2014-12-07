@@ -1,5 +1,8 @@
-.. image:: https://travis-ci.org/enkidulan/slidelint.png?branch=master
-    :target: https://travis-ci.org/enkidulan/slidelint
+.. image:: https://travis-ci.org/timvideos/slidelint.png?branch=master
+    :target: https://travis-ci.org/timvideos/slidelint
+
+.. image:: https://landscape.io/github/timvideos/slidelint/master/badges
+    :target: https://landscape.io/github/timvideos/slidelint
 
 
 .. contents::
@@ -11,6 +14,7 @@ Installation
 
 **System requirements:**
 
+    * Python 2
     * setuptools > 1.0
     * java-7 (for LanguageTool)
     * python-dev (python-develop)

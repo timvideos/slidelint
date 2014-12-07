@@ -3,12 +3,10 @@ from slidelint.utils import help_wrapper
 from slidelint.utils import SubprocessTimeoutHelper
 from slidelint.pdf_utils import convert_pdf_to_text
 
-import cStringIO as StringIO
 import os
 import requests
 import socket
 import subprocess
-import traceback
 
 from appdirs import user_data_dir
 from lxml import etree
@@ -626,6 +624,9 @@ class LanguagetoolServer(object):
                                                             self.config_file)
         self.url = 'http://127.0.0.1:%s' % self.port
 
+    # pylint gets confused about lxml.etree not having fromstring or
+    # XMLSyntaxError properties.
+    # pylint: disable=no-member
     def grammar_checker(self, text, language="en-US"):
         """ sends text to Languagetool Server and returns its checks results"""
         data = dict(language=language, text=text)
@@ -641,10 +642,8 @@ class LanguagetoolServer(object):
             content = requests.post(self.url, data=data, timeout=15)
         try:
             root = etree.fromstring(content.text.encode('utf-8'))
-        except etree.XMLSyntaxError, e:
+        except etree.XMLSyntaxError as e:
             # Add the content to the traceback
-            tb = StringIO.StringIO()
-            traceback.print_exc(file=tb)
             e.message += """
 --
 %s

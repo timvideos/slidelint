@@ -6,6 +6,7 @@ The tests check:
   2. whether languagetool finds grammar issues
 """
 import os.path
+import pprint
 import unittest
 from testfixtures import compare, tempdir, ShouldRaise
 
@@ -52,12 +53,11 @@ class Test_Languagetool_Checker(unittest.TestCase):
         target_file = os.path.join(
             here, 'languagetool_grammar.pdf')
         rez = language_tool_checker.main(target_file=target_file)
+        pprint.pprint(rez)
         compare(rez,
                 [{'help': 'It would be a honour.',
                   'id': 'C2000',
-                  'msg': 'misspelling - Use \'an\' instead of \'a\' if '
-                         'the following word starts with a vowel sound,'
-                         ' e.g. \'an article\', \'an hour\'',
+                  'msg': "misspelling - Use 'an' instead of 'a' if the following word starts with a vowel sound, e.g. 'an article', 'an hour'",
                   'msg_name': 'EN_A_VS_AN',
                   'page': 'Slide 1'},
                  {'help': 'It would be a honour.',
@@ -65,22 +65,21 @@ class Test_Languagetool_Checker(unittest.TestCase):
                   'msg': 'misspelling - Possible spelling mistake found',
                   'msg_name': 'MORFOLOGIK_RULE_EN_US',
                   'page': 'Slide 1'},
-                 {'help': 'It was only shown on ITV and '
-                          'not B.B.C.',
+                 {'help': "... they're coats in the cloakroom. I know alot about precious stones. Have you seen th...",
                   'id': 'C2005',
                   'msg': 'misspelling - Possible spelling mistake found',
                   'msg_name': 'MORFOLOGIK_RULE_EN_US',
-                  'page': 'Slide 1'},
-                 {'help': '... they\'re coats in the cloakroom. '
-                          'I know alot about precious stones. Have '
-                          'you seen th...',
-                  'id': 'C2005',
-                  'msg': 'misspelling - Possible spelling mistake found',
-                  'msg_name': 'MORFOLOGIK_RULE_EN_US',
+                  'page': 'Slide 3'},
+                 {'help': "...ones. Have you seen the water damage to the alter in St. John's Church?",
+                  'id': 'C2000',
+                  'msg': 'grammar - Probably a wrong construction: a/the + infinitive',
+                  'msg_name': 'A_INFINITVE',
                   'page': 'Slide 3'}])
 
     def test_checker_helpers(self):
-        compare(language_tool_checker.main(msg_info='All'),
+        rez = language_tool_checker.main(msg_info='All')
+        pprint.pprint(rez)
+        compare(rez,
                 [{'help': 'Language tool found error',
                   'id': 'C2000',
                   'msg': 'Language tool found error',
@@ -716,14 +715,17 @@ class Test_Languagetool_Checker(unittest.TestCase):
                   'msg': 'http://wiki.languagetool.org/',
                   'msg_name': 'ZERO-SUM_GAIN',
                   'page': ''}])
-        compare(language_tool_checker.main(msg_info=['C2112']),
+        rez = language_tool_checker.main(msg_info=['C2112'])
+        pprint.pprint(rez)
+        compare(rez,
                 [{'help': 'http://wiki.languagetool.org/',
                   'id': 'C2112',
                   'msg': 'http://wiki.languagetool.org/',
                   'msg_name': 'CAN_BEEN',
                   'page': ''}])
-        compare(language_tool_checker.main(msg_info=['W8001']),
-                [])
+        rez = language_tool_checker.main(msg_info=['W8001'])
+        pprint.pprint(rez)
+        compare(rez, [])
 
 if __name__ == '__main__':
     unittest.main()

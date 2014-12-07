@@ -1,13 +1,19 @@
----
+language: python
+python:
+ - "2.7"
+
+# Install the Ubuntu requirements.
 before_install:
  - sudo apt-get install -qq python-dev poppler-utils poppler-data
  - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
-install:
-- pip install setuptools --upgrade
-- python bootstrap.py
-- bin/buildout -N -q -t 10
-python:
-- 2.7
-language: python
-script: bin/nosetests --no-skip
 
+# Install slidelint itself.
+install:
+ - pip install setuptools --upgrade
+ - python bootstrap.py
+ - bin/buildout -N -q -t 10
+
+# Run the tests
+script:
+ - bin/pylint --report=no --rcfile=.pylintrc src/slidelint
+ - bin/nosetests --no-skip
