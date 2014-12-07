@@ -50,8 +50,8 @@ def check_edges_danger_zone(path, min_page_ratio=12):
                            'closer than 1/%sth of the page size '
                            'to the edges.' % min_page_ratio,
                     'help': 'Too close to edges: Text should not appear '
-                    'closer than 1/12th(by default) of the'
-                    ' page size to the edges.'}
-                )
+                            'closer than 1/12th(by default) of the'
+                            ' page size to the edges.',
+                    })
                 break
     return rez

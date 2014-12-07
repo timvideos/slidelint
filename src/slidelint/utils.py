@@ -53,12 +53,12 @@ def processes_wrapper(queue, funk, kwargs):
         queue.put(rez)
     # there is a need to catch all possible exceptions
     except Exception, msg:  # pylint: disable=W0703
-	tb = StringIO.StringIO()
-	traceback.print_exc(file=tb)
+        tb_output = StringIO.StringIO()
+        traceback.print_exc(file=tb_output)
 
         info = "The function '%s' of '%s' module "\
                "raised an Exception:\n\n" % (funk.__name__, funk.__module__)
-        queue.put(info + msg.message + tb.getvalue())
+        queue.put(info + msg.message + tb_output.getvalue())
 
 
 class MultiprocessingManager(object):

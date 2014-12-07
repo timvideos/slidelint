@@ -100,7 +100,7 @@ def cli():
     output = {'format': args['--output-format'],
               'files_output': args['--files-output'],
               'ids': args['--include-ids']
-              }
+             }
     enable_disable_ids = (args['--enable'], args['--disable'])
     msg_info = args['<msg_id>'] or "All" if args['help-msg'] else None
     lint(target_file, config_file, output, enable_disable_ids, msg_info)

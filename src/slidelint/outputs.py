@@ -10,7 +10,10 @@ import logging
 USER_MESSAGES = logging.getLogger('user_messages')
 
 
-class JsonFormatter():
+class JsonFormatter(object):
+    """Small class format output as JSON."""
+
+    # pylint: disable=unused-argument
     def __init__(self, show_id, mute_ids, path):
         self.mute_ids = mute_ids
 
