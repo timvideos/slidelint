@@ -1,7 +1,7 @@
 import subprocess
 import os.path
 import unittest
-from testfixtures import OutputCapture, compare, ShouldRaise
+from testfixtures import OutputCapture, compare, ShouldRaise, StringComparison
 
 from slidelint.cli import lint
 from slidelint.utils import MultiprocessingManager
@@ -49,21 +49,25 @@ class TestMultiprocessingManager(unittest.TestCase):
     def test_bad_args(self):
         mltprsm = MultiprocessingManager()
         mltprsm.append(exeption_raising_func, {'x': 0})
-        exp = IOError(
+        exp = IOError(StringComparison(
             "The function 'exeption_raising_func' of "
-            "'slidelint.tests.modules.linter.test_modules' module raised an "
-            "Exception:\nexeption_raising_func() got an unexpected keyword"
-            " argument 'x'",)
+            "'slidelint.tests.modules.linter.test_modules' module"
+            " raised an Exception:\n"
+            "exeption_raising_func\(\) got an unexpected keyword"
+            " argument 'x'\n"
+            ".*"))
         with ShouldRaise(exp):
             [i for i in mltprsm]
 
     def test_exeption(self):
         mltprsm = MultiprocessingManager()
         mltprsm.append(exeption_raising_func, {'arg': 0})
-        exp = IOError(
+        exp = IOError(StringComparison(
             "The function 'exeption_raising_func' of "
             "'slidelint.tests.modules.linter.test_modules' module"
-            " raised an Exception:\ninteger division or modulo by zero")
+            " raised an Exception:\n"
+            "integer division or modulo by zero\n"
+            ".*"))
         with ShouldRaise(exp):
             [i for i in mltprsm]
 
