@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/enkidulan/slidelint.png?branch=master
-    :target: https://travis-ci.org/enkidulan/slidelint
+.. image:: https://travis-ci.org/timvideos/slidelint.png?branch=master
+    :target: https://travis-ci.org/timvideos/slidelint
 
 
 .. contents::
