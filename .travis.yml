@@ -15,4 +15,5 @@ install:
 
 # Run the tests
 script:
+ - bin/pylint --report=no --rcfile=.pylintrc src/slidelint
  - bin/nosetests --no-skip
