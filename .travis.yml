@@ -10,10 +10,16 @@ before_install:
 # Install slidelint itself.
 install:
  - pip install setuptools --upgrade
+ - pip install coveralls
  - python bootstrap.py
  - bin/buildout -N -q -t 10
 
 # Run the tests
 script:
  - bin/pylint --report=no --rcfile=.pylintrc src/slidelint
- - bin/nosetests --no-skip
+ - bin/nosetests --with-coverage --cover-package=slidelint --no-skip
+
+# Upload coverage information to coveralls.io
+after_success:
+ - pip install coveralls
+ - coveralls
